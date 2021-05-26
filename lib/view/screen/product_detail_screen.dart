@@ -1,15 +1,19 @@
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
+
+import 'package:shoping_app/controller/Provider/productprovider.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final String title;
-  final id;
-  final double price;
-  ProductDetailScreen(this.id,this.title,this.price);
-  @override
+  static const routeName = '/product-detail';
+
+   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-  return Scaffold(
-   appBar: AppBar (title: Text(title),) ,
+     // is the id coming from item click on GridScreen
+        final productId = ModalRoute.of(context)!.settings.arguments as String;
+       //this loadedProduct is checking that productId is same as loadedProduct
+       final loadedProduct = Provider.of<Productprovider>(context).findId(productId);
+       return Scaffold(
+          appBar: AppBar (title: Text(loadedProduct.title), )
      );
   }
 }
